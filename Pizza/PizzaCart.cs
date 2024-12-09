@@ -45,6 +45,24 @@ namespace Pizza
             return cartItems;
         }
 
+        public void Display()
+        {
+            Console.WriteLine("Current Cart:");
+            Console.WriteLine($"{"No.", 3}  {"Pizza",-15} {"Qty",5} {"Price",10}");
+            Console.WriteLine(new string('-', 38));
+            var sum = 0m;
+            var listNumber = 1;
+            foreach (var item in this.GetItems())
+            {
+                var price = item.Pizza.Price * item.Quantity;
+                Console.WriteLine($"{listNumber, 3}  {item.Pizza.Name,-15} {item.Quantity,5} {price,10}");
+                sum += price;
+                listNumber++;
+            }
+            Console.WriteLine();
+            Console.WriteLine($"{' ', 15}Total: $ {sum}");
+        }
+
         public static void PlaceOrder(string name, string address, PizzaCart cart)
         {
             try
