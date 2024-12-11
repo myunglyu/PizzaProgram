@@ -13,7 +13,7 @@
             while (true)
             {
                 Console.WriteLine();
-                Console.WriteLine("Press number to vew details");
+                Console.WriteLine("Press number to vew details or add to cart");
                 Console.WriteLine("'x' to exit, 'c' to view cart, 'm' for menu");
                 var menuInput = Console.ReadLine();
                 Console.WriteLine();
@@ -83,11 +83,15 @@
                     var pizza = context.Pizzas.ToList()[number - 1];
                     PizzaMenu.DisplayDetails(pizza);
 
-                    Console.WriteLine("How many?");
+                    Console.WriteLine("How many? enter 0 to cancel");
                     var quantityInput = Console.ReadLine();
 
                     if (int.TryParse(quantityInput, out var qty))
                     {
+                        if (qty == 0)
+                        {
+                            return;
+                        }
                         var cartItem = new CartItem { Pizza = pizza, Quantity = qty };
                         cart.Add(cartItem);
                     }
